@@ -12,14 +12,14 @@ import (
 // YAML struct
 type Config struct {
 	Database struct {
-		Addr string `yarm: addr`
-		Port int    `yarm: port`
-		User string `yarm: user`
-		Pass string `yarm: pass`
-	} `yarm: Database`
+		Addr string `yarm: "addr"`
+		Port int    `yarm: "port"`
+		User string `yarm: "user"`
+		Pass string `yarm: "pass"`
+	} `yarm: "Database"`
 	Slack struct {
-		Token string `yarm: token`
-	} `yarm: Slack`
+		Token string `yarm: "token"`
+	} `yarm: "Slack"`
 }
 
 func LoadConfigration(path string) Config {
@@ -34,15 +34,3 @@ func LoadConfigration(path string) Config {
 	}
 	return config
 }
-
-// func LoadConfiguration() Config {
-// 	var config Config
-// 	configFile, err := os.Open("config.json")
-// 	defer configFile.Close()
-// 	if err != nil {
-// 		fmt.Println(err.Error())
-// 	}
-// 	jsonParser := json.NewDecoder(configFile)
-// 	jsonParser.Decode(&config)
-// 	return config
-// }

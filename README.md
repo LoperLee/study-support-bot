@@ -15,6 +15,7 @@
 ## Dependency
 
 * [Go YAML](https://github.com/go-yaml/yaml)
+* [slack-go](https://github.com/slack-go/slack)
 
 ## License
 
