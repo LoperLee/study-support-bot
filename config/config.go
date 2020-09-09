@@ -16,6 +16,7 @@ type Config struct {
 		Port int    `yarm: "port"`
 		User string `yarm: "user"`
 		Pass string `yarm: "pass"`
+		Name string `yarm: "name"`
 	} `yarm: "Database"`
 	Slack struct {
 		Token string `yarm: "token"`
