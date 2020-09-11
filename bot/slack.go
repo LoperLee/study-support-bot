@@ -13,10 +13,16 @@ type Bot struct {
 	status int
 }
 
-type Commit struct {
+type Message struct {
 	Title  string
 	Attach slack.Attachment
 }
+
+// MessageType
+const (
+	Commit = iota + 1
+	Booking
+)
 
 const (
 	NOT_LOADING = iota
@@ -34,14 +40,13 @@ func InitBot(key string) *Bot {
 }
 
 // message to channel
-func (bot *Bot) SendingToChannel(message interface{}) {
+func (bot *Bot) SendingToChannel(message Message, msgType int) {
 	var channel, title string
 	var attach slack.Attachment
-	switch message.(type) {
+	switch msgType {
 	case Commit:
 		channel = ""
-		msg := message.(Commit)
-		title, attach = msg.Build()
+		title, attach = message.Build()
 		break
 	default:
 		panic("This is not allowed typed message.")
@@ -55,12 +60,12 @@ func (bot *Bot) SendingToChannel(message interface{}) {
 }
 
 // build message
-func (com Commit) Build() (string, slack.Attachment) {
+func (com Message) Build() (string, slack.Attachment) {
 	return com.Title, com.Attach
 }
 
-// Setting commit message
-func (com Commit) SetMessage(message string) {
+// Setting message
+func (com Message) SetMessage(message string) {
 	com.Title = message
 	com.Attach = slack.Attachment{
 		Color:  "#FFFFFF",
